@@ -4,6 +4,7 @@ import db.db
 from db.db import conn, cursor
 from db.from_db import db_select
 import pymysql
+import convert as cv
 
 app = Flask(__name__)
 
@@ -25,7 +26,7 @@ def ott():
     print(sql)
     cursor.execute(sql)
     res = cursor.fetchall()
-    return {"Data": res}
+    return {"Data": cv.convert(res)}
 
 
 @app.route("/contents/id/<id>")
@@ -44,7 +45,7 @@ def get_info_title(title):
     print(sql)
     cursor.execute(sql)
     res = cursor.fetchall()
-    return {"Data": res}
+    return {"Data": cv.convert(res)}
 
 @app.route("/review/<id>")
 def get_review(id):
@@ -52,7 +53,7 @@ def get_review(id):
     sql = f'SELECT * FROM MovieReview WHERE KinoId = {id};'
     cursor.execute(sql)
     res = cursor.fetchall()
-    return {"Data": res}
+    return {"Data": cv.convert(res)}
 
 @app.route("/img/<id>")
 def get_img(id):
@@ -60,18 +61,20 @@ def get_img(id):
     sql = f'SELECT * FROM ImgUrl WHERE KinoId = {id};'
     cursor.execute(sql)
     res = cursor.fetchall()
-    return {"Data": res}
+    return {"Data": cv.convert(res)}
 
 @app.route("/ott/<ott>")
 def getott(ott):
     if ott == 'netflix':
         ott = "넷플릭스"
+    elif ott == 'wave':
+        ott = "웨이브"
     cursor = db.db.cursor()
     sql = "SELECT * FROM MovieInfo WHERE OttLinks like '%"+ ott +"%';"
     cursor.execute(sql)
     res = cursor.fetchall()
     print(type(res))
-    return {"Data": res}
+    return {"Data": cv.convert(res)}
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -7,8 +7,8 @@ import random
 warnings.filterwarnings('ignore')
 
 # db connect
-user = "chipnday"
-password = "chipnday2022"
+user = "movienight"
+password = "09211009"
 host = "132.226.150.234:3306"
 db = "chipnday_db"
 db_connection_str = f'mysql+pymysql://{user}:{password}@{host}/{db}'

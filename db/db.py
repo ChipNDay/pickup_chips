@@ -4,8 +4,8 @@ warnings.filterwarnings('ignore')
 import pymysql
 
 # db connect
-user = "chipnday"
-password = "chipnday2022"
+user = "movienight"
+password = "09211009"
 host = "132.226.150.234"
 port = 3306
 db = "chipnday_db"
